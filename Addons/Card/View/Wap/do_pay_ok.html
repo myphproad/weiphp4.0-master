@@ -1,0 +1,23 @@
+<include file="Home@Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/card.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body id="scratch">
+<div class="container body" style="position:relative">      
+      <div class="sn_box">
+      	 <div class="qr_tips">
+           <img src="__IMG__/yes.png">
+            <p>消费确认完成</p>
+          </div>
+          
+      </div>
+      <div class="m_20"><a class="btn" href="javascript:;" onClick="closepage();">返回继续扫码</a></div>
+   <p class="copyright">{$system_copy_right}{$tongji_code}</p>
+</div>
+</body>
+<script type="text/javascript">
+function closepage(){
+	WeixinJSBridge.call('closeWindow');
+}
+var h=$(document).height();
+$('.container').css("min-height",h);
+</script>
+</html>

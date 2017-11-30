@@ -1,0 +1,98 @@
+<include file="Home@Public/mobile_head"/>	
+
+<body>
+	<div id="container" class="container body">
+        
+        <div class="tab_nav">
+            <a class="cur" href="javascript:" rel=0>未使用</a>
+            <a href="javascript:" rel=1>已使用</a>
+        </div>
+        
+    	<div class="conpons_list" id="conpons_list_0">
+    	<if condition="!empty($list[0])" >
+        	<volist name='list[0]' id="vo">
+                 	<a class="conpon_item" href="{:addons_url('Coupon://Wap/show',array('id'=>$vo['id'],'sn_id'=>$vo['sn_id']))}">
+                  <div class="coupon_head" 
+                  	 style="<notempty name="vo[background]">background:url({$vo.background|get_cover_url}) no-repeat; background-size:100% auto;<else />background:url({:ADDON_PUBLIC_PATH}/cover_pic.jpg) no-repeat; background-size:100% auto;</notempty>"
+                    >
+                  		
+                        
+                        <div class="line"></div>
+                        
+                  </div>
+                  <div class="coupon_bottom" style="height: auto;">
+                  		<p class="title">{$vo.title}</p>
+                        <p class="colorless">
+                                <notempty name="vo.over_time">有效期至： <b>{$vo.over_time|time_format}</b>
+                                <if condition ="$vo[is_old] eq 1"> （已过期）</if>
+                                </notempty>                        	
+                        </p>
+                  </div>
+                </a>
+            </volist> 
+            <else />
+        	<div class="empty_default">
+            <br/><br/><br/><br/>
+            	<img src="__IMG__/empty_content.png" width="100"/>
+                <br/>
+                没有未使用的优惠券~</p>
+            </div>
+        </if>
+        </div>
+    	<div class="conpons_list" id="conpons_list_1" style="display:none">
+    	<if condition="!empty($list[1])" >
+        	<volist name='list[1]' id="vo">
+                  	<a class="conpon_item conpon_item_disable" href="javascript:;">
+                  <div class="coupon_head" 
+                  	 style="<notempty name="vo['background']">background:url({$vo.background|get_cover_url}) no-repeat; background-size:100% auto;<else />background:url({:ADDON_PUBLIC_PATH}/cover_pic.jpg) no-repeat; background-size:100% auto;</notempty>"
+                    >
+                  		
+                        
+                        <div class="line"></div>
+                        
+                  </div>
+                  <div class="coupon_bottom" style="height: auto;">
+                  		<p class="title">{$vo.title}</p>
+                        <p class="colorless">已使用： <b>{$vo.use_time|time_format}</b></p>
+                  </div>
+                </a>
+            </volist> 
+                        <else />
+        	<div class="empty_default">
+            <br/><br/><br/><br/>
+            	<img src="__IMG__/empty_content.png" width="100"/>
+                <br/>
+                没有已使用的优惠券~</p>
+            </div>
+        </if>
+        </div>     
+       
+
+        <p class="copyright">{$system_copy_right}</p>
+                
+    </div>
+    <include file="Home@Public/card_footer"/>
+    <include file="Home@Public/mobile_foot"/>
+</body>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('hideToolbar');
+});
+$('.tab_nav a').click(function(){
+    $('.tab_nav a').removeClass('cur')
+    $(this).addClass('cur')
+    
+    var rel = $(this).attr('rel')
+	console.log(rel)
+	if(rel==0){
+		$('#conpons_list_0').show()
+		$('#conpons_list_1').hide()
+	}else{
+		$('#conpons_list_0').hide()
+		$('#conpons_list_1').show()		
+	}
+	
+    
+})
+</script>
+</html>

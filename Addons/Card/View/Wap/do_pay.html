@@ -1,0 +1,27 @@
+<include file="Home@Public/mobile_head"/>
+<link href="{:ADDON_PUBLIC_PATH}/card.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+<body id="scratch">
+<div class="container body" style="position:relative; background:#eee;">      
+      <div class="sn_box" style="padding:25px">
+         <p>消费金额： ￥{$info.pay}</p>
+         <notempty name="info.sn_id"><p>优惠金额： {$info.sn_id}</p></notempty>
+         <p>支付方式： {$info.pay_type}</p>
+         <p>消费门店： {$info.branch_id}</p>
+         <p>会员编号： {$info.number}</p>
+         <notempty name="info.member_id"><p>会员姓名： {$info.member_id}</p></notempty>
+         <p>消费时间： {$info.cTime}</p>
+      </div>
+      <form id="form" action="{:U('do_pay_ok')}" method="post" class="form-horizontal">
+            <input type="hidden" name="id" value="{$info.id}" >
+            <div class="m_20">
+                  <button class="use_btn" id="submit" type="submit" target-form="form-horizontal">确认消费</button>
+            </div>
+      </form>
+   <p class="copyright">{$system_copy_right}{$tongji_code}</p>
+</div>
+</body>
+<script type="text/javascript">
+var h=$(document).height();
+$('.container').css("min-height",h);
+</script>
+</html>
